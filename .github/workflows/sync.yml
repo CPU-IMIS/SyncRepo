@@ -1,0 +1,33 @@
+name: Sync from Gitee
+
+on:
+  workflow_dispatch:
+
+jobs:
+  Synchronize:
+    runs-on: ubuntu-latest
+    steps:      
+      - name: Add SSH keys
+        uses: webfactory/ssh-agent@v0.7.0
+        with:
+          ssh-private-key: |
+            ${{ secrets.SRC_SSH_KEY }}
+            ${{ secrets.DES_SSH_KEY }}
+      
+      - name: Add Host Key
+        run: |
+          echo "gitee.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEKxHSJ7084RmkJ4YdEi5tngynE8aZe2uEoVVsB/OvYN" >> ~/.ssh/known_hosts
+      
+      - name: Clone From Gitee
+        run: |
+          git clone git@gitee.com:cpu_-imis/CPUIMS_Clone.git
+
+      - name: Change remote
+        run: |
+          cd CPUIMS_Clone
+          git remote rm origin
+          git remote add origin git@github.com:CPU-IMIS/CPUIMS_Clone.git
+
+      - name: Push to Github
+        run: |
+          git push -u origin master -f
