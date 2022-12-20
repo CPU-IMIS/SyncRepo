@@ -2,6 +2,8 @@ name: Sync from Gitee
 
 on:
   workflow_dispatch:
+  repository_dispatch:
+    types: [push_from_gitee]
 
 jobs:
   Synchronize:
