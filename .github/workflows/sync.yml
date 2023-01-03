@@ -4,6 +4,9 @@ on:
   workflow_dispatch:
   repository_dispatch:
     types: [push_from_gitee]
+  schedule:
+    # 每6小时同步一次
+    - cron:  '0 */6 * * *'
 
 jobs:
   Synchronize:
