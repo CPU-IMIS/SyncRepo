@@ -25,17 +25,17 @@ jobs:
       
       - name: Clone From Gitee
         run: |
-          git clone git@gitee.com:cpu_-imis/CPUIMS_Clone.git
+          git clone git@gitee.com:nanjing-yaoda-education/cpu-instrumentmanagementsystem.git
 
       - name: Change remote
         run: |
-          cd CPUIMS_Clone
+          cd cpu-instrumentmanagementsystem
           git remote rm origin
           git remote add origin git@github.com:CPU-IMIS/CPUIMS_Clone.git
 
       - name: Push to Github
         run: |
-          cd CPUIMS_Clone
+          cd cpu-instrumentmanagementsystem
           git push -u origin master -f
 
       - name: Delete workflow runs
